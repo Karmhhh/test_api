@@ -12,11 +12,9 @@ const getUsers = async () => {
 };
 
 export default function Mutation() {
-
   const [postData, setPostData] = useState({ id: "", body: "" });
   const mutation = useMutation({
-    mutationFn: 
-    ()=> updateUser,
+    mutationFn: () => updateUser,
     onSuccess: () => {
       // Success actions
     },
@@ -40,32 +38,34 @@ export default function Mutation() {
         }}
       ></input>
       <br />
-      <i>{`{ id: "${postData.id}"`}</i>
+      <p> <i>{`{ id: "${postData.id}"`}</i>
       <i>
         {` , body: "${postData.body}"`}
         {" }"}
-      </i>
+      </i></p>
+     
       <div>
-      {mutation.isLoading ? (
-        'Adding...'
-      ) : (
-        <>
-          {mutation.isError ? (
-            <div>An error occurred: {mutation.error.message}</div>
-          ) : null}
-
-          {mutation.isSuccess ? <div>Added!</div> : null}
-
-          <button
-            onClick={() => {
-              mutation.mutate(postData)
-            }}
-          >
-            Add New
-          </button>
-        </>
-      )}
-    </div>
+        <br />
+        <button
+          onClick={() => {
+            mutation.mutate(postData);
+          }}
+        >
+          Add New
+        </button>{" "}
+           <br />
+        {mutation.isLoading ? (
+          "Adding..."
+        ) : (
+          <>
+            {mutation.isError ? (
+              <div>An error occurred: {mutation.error.message}</div>
+            ) : null}{" "}
+         
+            {mutation.isSuccess ? <div>Added!</div> : null}
+          </>
+        )}
+      </div>
     </div>
   );
 }
