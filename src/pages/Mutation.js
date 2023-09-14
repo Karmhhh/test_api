@@ -45,12 +45,27 @@ export default function Mutation() {
         {` , body: "${postData.body}"`}
         {" }"}
       </i>
+      <div>
+      {mutation.isLoading ? (
+        'Adding...'
+      ) : (
+        <>
+          {mutation.isError ? (
+            <div>An error occurred: {mutation.error.message}</div>
+          ) : null}
 
-      {mutation.isSuccess ? <div>Added!</div> : null}
+          {mutation.isSuccess ? <div>Added!</div> : null}
 
-
-      <br />
-      <button onClick={ mutation.mutate({ id: postData.id, body: postData.body})}>Post</button>
+          <button
+            onClick={() => {
+              mutation.mutate(postData)
+            }}
+          >
+            Add New
+          </button>
+        </>
+      )}
+    </div>
     </div>
   );
 }
